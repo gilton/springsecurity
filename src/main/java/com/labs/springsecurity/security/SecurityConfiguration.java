@@ -1,6 +1,7 @@
 package com.labs.springsecurity.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -18,8 +19,9 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
-	private UserDetailsService userDetailsService;
+	private UserDetailsService userDService;
 	
+	@Bean
 	@Override
 	public AuthenticationManager authenticationManagerBean() throws Exception {
 		return authenticationManagerBean();
@@ -37,8 +39,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+		auth.userDetailsService(this.userDService).passwordEncoder(passwordEncoder());
 	}
 	
+	@Bean
 	public PasswordEncoder passwordEncoder() { return NoOpPasswordEncoder.getInstance(); }
 }

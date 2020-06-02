@@ -2,12 +2,11 @@ package com.labs.springsecurity.controller;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.labs.springsecurity.entity.User;
-import com.labs.springsecurity.repository.UserRepository;
+import com.labs.springsecurity.service.UserService;
 
 import lombok.AllArgsConstructor;
 
@@ -15,8 +14,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class UserController {
 	
-	@Autowired
-	private UserRepository repository;
+	private UserService repository;
 	
 	@GetMapping("/user")
 	public List<User> getAll(){
